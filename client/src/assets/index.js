@@ -1,9 +1,10 @@
-import logoText from './vitamid_logo-text'
-import logoPicture from './vitamid_logo-picture'
-import logoTotal from './vitamid_logo-total'
+import logoText from './logo_text.png'
+import logoPicture from './logo_picture.png'
+import logoTotal from './logo_total.png'
 
 export {
     logoText,
     logoPicture,
     logoTotal
 }
+
