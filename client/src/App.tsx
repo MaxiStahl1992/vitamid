@@ -20,6 +20,14 @@ import { Login } from "pages/login";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
 
+import {
+  Home
+} from "./pages/index";
+
+import {
+  VillaOutlined
+} from "@mui/icons-material";
+
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
   const token = localStorage.getItem("token");
@@ -36,23 +44,42 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 function App() {
   const authProvider: AuthProvider = {
-    login: ({ credential }: CredentialResponse) => {
+    login: async ({ credential }: CredentialResponse) => {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            ...profileObj,
-            avatar: profileObj.picture,
-          })
+        const response = await fetch(
+          "http://localhost:8080/api/v1/users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+              name: profileObj.name,
+              email: profileObj.email,
+              avatar: profileObj.picture,
+            }),
+          },
         );
-      }
 
+        const data = await response.json();
+
+        if(response.status === 300) {
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              ...profileObj,
+              avatar: profileObj.picture,
+            }),
+          );
+        } else {
+          return Promise.reject();
+        }
+      }
       localStorage.setItem("token", `${credential}`);
 
       return Promise.resolve();
     },
+
     logout: () => {
       const token = localStorage.getItem("token");
 
@@ -67,7 +94,9 @@ function App() {
 
       return Promise.resolve();
     },
+
     checkError: () => Promise.resolve(),
+    
     checkAuth: async () => {
       const token = localStorage.getItem("token");
 
@@ -78,6 +107,7 @@ function App() {
     },
 
     getPermissions: () => Promise.resolve(),
+
     getUserIdentity: async () => {
       const user = localStorage.getItem("user");
       if (user) {

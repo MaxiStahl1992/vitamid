@@ -348,7 +348,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             display: { sm: "block", md: "none" },
             "& .MuiDrawer-paper": {
               width: 256,
-              bgcolor: "secondary.main",
+              bgcolor: (theme) => theme.palette.background.default,
             },
           }}
         >
@@ -371,7 +371,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               width: drawerWidth,
-              bgcolor: "secondary.main",
+              bgcolor: (theme) => theme.palette.background.default,
               overflow: "hidden",
               transition: "width 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
             },
@@ -400,7 +400,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           <Button
             sx={{
               background: "rgba(0,0,0,.5)",
-              color: "primary.contrastText",
+              bgcolor: (theme) => theme.palette.background.default,
               textAlign: "center",
               borderRadius: 0,
               borderTop: "1px solid #ffffff1a",
