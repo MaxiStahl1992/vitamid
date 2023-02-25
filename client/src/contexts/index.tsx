@@ -24,9 +24,9 @@ const myLightTheme = createTheme ({
         disabled: "rgba(0, 0, 0, 0.38)",
       },
       primary: {
-          main: "#00aa95",
-          light: "rgb(51, 187, 170)",
-          dark: "rgb(0, 118, 104)",
+          main: "#a5e887",
+          light: "rgb(183, 236, 159)",
+          dark: "rgb(115, 162, 94)",
           contrastText: "rgba(0, 0, 0, 0.87)",
       },
       secondary: {
@@ -74,9 +74,9 @@ const myDarkTheme = createTheme ({
         disabled: "rgba(255, 255, 255, 0.5)",
       },
       primary: {
-          main: "#00aa95",
-          light: "rgb(51, 187, 170)",
-          dark: "rgb(0, 118, 104)",
+          main: "#a5e887",
+          light: "rgb(183, 236, 159)",
+          dark: "rgb(115, 162, 94)",
           contrastText: "rgba(0, 0, 0, 0.87)",
       },
       secondary: {

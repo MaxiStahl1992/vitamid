@@ -11,6 +11,7 @@ import {
   Button,
   IconButton,
   MuiList,
+  width,
 } from "@pankod/refine-mui";
 import {
   ListOutlined,
@@ -125,7 +126,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                     sx={{
                       justifyContent: "center",
                       minWidth: 36,
-                      color: "primary.contrastText",
+                      color: (theme) => theme.palette.text.primary,
                     }}
                   >
                     {icon ?? <ListOutlined />}
@@ -135,7 +136,10 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                     primaryTypographyProps={{
                       noWrap: true,
                       fontSize: "14px",
-                      fontWeight: isSelected ? "bold" : "normal",
+                      fontWeight: isSelected 
+                      ? "bold" 
+                      : "normal",
+                      color: (theme) => theme.palette.text.primary,
                     }}
                   />
                   {!collapsed && (isOpen ? <ExpandLess /> : <ExpandMore />)}
@@ -178,18 +182,29 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                 py: isNested ? 1.25 : 1,
                 "&.Mui-selected": {
                   "&:hover": {
-                    backgroundColor: "transparent",
+                    backgroundColor: isSelected 
+                    ? (theme) => theme.palette.primary.main 
+                    : "transparent",
                   },
-                  backgroundColor: "transparent",
+                  backgroundColor: isSelected 
+                  ? (theme) => theme.palette.primary.main 
+                  : "transparent",
+                },
+                "&:hover": {
+                  backgroundColor: (theme) => theme.palette.primary.light,
                 },
                 justifyContent: "center",
+                margin: "10px auto",
+                borderRadius: "12px",
+                minHeight: "56px",
+                width: "90%"
               }}
             >
               <ListItemIcon
                 sx={{
                   justifyContent: "center",
                   minWidth: 36,
-                  color: "primary.contrastText",
+                  color: (theme) => theme.palette.text.primary,
                 }}
               >
                 {icon ?? <ListOutlined />}
@@ -200,6 +215,8 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                   noWrap: true,
                   fontSize: "14px",
                   fontWeight: isSelected ? "bold" : "normal",
+                  color: (theme) => theme.palette.text.primary,
+                  marginLeft: "10px",
                 }}
               />
             </ListItemButton>
@@ -229,18 +246,25 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             py: 1,
             "&.Mui-selected": {
               "&:hover": {
-                backgroundColor: "transparent",
+                backgroundColor: (theme) => theme.palette.primary.light 
               },
-              backgroundColor: "transparent",
+              backgroundColor: (theme) => theme.palette.primary.light ,
+            },
+            "&:hover": {
+              backgroundColor: (theme) => theme.palette.primary.light,
             },
             justifyContent: "center",
+            margin: "10px auto",
+            borderRadius: "12px",
+            minHeight: "56px",
+            width: "90%"
           }}
         >
           <ListItemIcon
             sx={{
               justifyContent: "center",
               minWidth: 36,
-              color: "primary.contrastText",
+              color: (theme) => theme.palette.text.primary,
             }}
           >
             <Dashboard />
@@ -251,6 +275,8 @@ export const Sider: typeof DefaultSider = ({ render }) => {
               noWrap: true,
               fontSize: "14px",
               fontWeight: selectedKey === "/" ? "bold" : "normal",
+              color: (theme) => theme.palette.text.primary,
+              marginLeft: "10px"
             }}
           />
         </ListItemButton>
@@ -268,13 +294,23 @@ export const Sider: typeof DefaultSider = ({ render }) => {
       <ListItemButton
         key="logout"
         onClick={() => mutateLogout()}
-        sx={{ justifyContent: "center" }}
+        sx={{ 
+          justifyContent: "center",
+          margin: "10px auto",
+          borderRadius: "12px",
+          minHeight: "56px",
+          width: "90%", 
+          "&:hover": {
+            backgroundColor: (theme) => theme.palette.primary.light,
+          },
+        }}
       >
         <ListItemIcon
           sx={{
             justifyContent: "center",
             minWidth: 36,
-            color: "primary.contrastText",
+            color: (theme) => theme.palette.text.primary,
+            marginLeft: "2px",
           }}
         >
           <Logout />
@@ -284,6 +320,8 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           primaryTypographyProps={{
             noWrap: true,
             fontSize: "14px",
+            color: (theme) => theme.palette.text.primary,
+            marginLeft: "8px"
           }}
         />
       </ListItemButton>
@@ -311,7 +349,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
   };
 
   const drawer = (
-    <MuiList disablePadding sx={{ mt: 1, color: "primary.contrastText" }}>
+    <MuiList disablePadding sx={{ mt: 1, color: (theme) => theme.palette.background.default }}>
       {renderSider()}
     </MuiList>
   );
@@ -399,11 +437,17 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           </Box>
           <Button
             sx={{
-              background: "rgba(0,0,0,.5)",
-              bgcolor: (theme) => theme.palette.background.default,
+              background: (theme) => theme.palette.background.default,
               textAlign: "center",
-              borderRadius: 0,
-              borderTop: "1px solid #ffffff1a",
+              justifyContent: "center",
+              margin: "10px auto",
+              borderRadius: "12px",
+              minHeight: "56px",
+              width: "90%",
+              color: (theme) => theme.palette.text.primary,
+              "&:hover": {
+                background: (theme) => theme.palette.primary.light
+              }
             }}
             fullWidth
             size="large"
@@ -416,10 +460,10 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           sx={{
             display: { xs: "block", md: "none" },
             position: "fixed",
-            top: "64px",
-            left: "0px",
-            borderRadius: "0 6px 6px 0",
-            bgcolor: "secondary.main",
+            top: "8px",
+            left: "8px",
+            borderRadius: "6px 6px 6px 6px",
+            bgcolor: (theme) => theme.palette.primary.contrastText,
             zIndex: 1199,
             width: "36px",
           }}

@@ -25,7 +25,10 @@ import {
 } from "./pages/index";
 
 import {
-  VillaOutlined
+  SpaOutlined,
+  DiamondOutlined,
+  AccountCircleOutlined,
+  CalendarMonthOutlined
 } from "@mui/icons-material";
 
 const axiosInstance = axios.create();
@@ -44,41 +47,58 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 function App() {
   const authProvider: AuthProvider = {
-    login: async ({ credential }: CredentialResponse) => {
+    // login: async ({ credential }: CredentialResponse) => {
+    //   const profileObj = credential ? parseJwt(credential) : null;
+
+    //   if (profileObj) {
+    //     const response = await fetch(
+    //       "http://localhost:8080/api/v1/users",
+    //       {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json"},
+    //         body: JSON.stringify({
+    //           name: profileObj.name,
+    //           email: profileObj.email,
+    //           avatar: profileObj.picture,
+    //         }),
+    //       },
+    //     );
+
+    //     const data = await response.json();
+
+    //     if(response.status === 300) {
+    //       localStorage.setItem(
+    //         "user",
+    //         JSON.stringify({
+    //           ...profileObj,
+    //           avatar: profileObj.picture,
+    //         }),
+    //       );
+    //     } else {
+    //       return Promise.reject();
+    //     }
+    //   }
+    //   localStorage.setItem("token", `${credential}`);
+
+    //   return Promise.resolve();
+    // },
+    login: ({ credential }: CredentialResponse) => {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
-        const response = await fetch(
-          "http://localhost:8080/api/v1/users",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({
-              name: profileObj.name,
-              email: profileObj.email,
-              avatar: profileObj.picture,
-            }),
-          },
-        );
-
-        const data = await response.json();
-
-        if(response.status === 300) {
           localStorage.setItem(
-            "user",
-            JSON.stringify({
-              ...profileObj,
-              avatar: profileObj.picture,
-            }),
+              "user",
+              JSON.stringify({
+                  ...profileObj,
+                  avatar: profileObj.picture,
+              }),
           );
-        } else {
-          return Promise.reject();
-        }
       }
+
       localStorage.setItem("token", `${credential}`);
 
       return Promise.resolve();
-    },
+  },
 
     logout: () => {
       const token = localStorage.getItem("token");
@@ -128,12 +148,26 @@ function App() {
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: "posts",
-              list: MuiInferencer,
-              edit: MuiInferencer,
-              show: MuiInferencer,
-              create: MuiInferencer,
-              canDelete: true,
+              name: "Vitamin",
+              list: Home,
+              icon: <SpaOutlined/>
+            },
+            {
+              name: "Mineral",
+              list: Home,
+              icon: <DiamondOutlined/>
+            },
+            {
+              name: "Planer",
+              options: { label: "Planer" },
+              list: Home,
+              icon: <CalendarMonthOutlined/>
+            },
+            {
+              name: "my-profile",
+              options: { label: "My Profile"},
+              list: Home,
+              icon: <AccountCircleOutlined/>
             },
           ]}
           Title={Title}
@@ -143,6 +177,7 @@ function App() {
           routerProvider={routerProvider}
           authProvider={authProvider}
           LoginPage={Login}
+          DashboardPage={Home}
         />
       </RefineSnackbarProvider>
     </ColorModeContextProvider>
