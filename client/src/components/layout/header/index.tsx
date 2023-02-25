@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
   const shouldRenderHeader = true; // since we are using the dark/light toggle; we don't need to check if user is logged in or not.
 
   return shouldRenderHeader ? (
-    <AppBar color="default" position="sticky" elevation={1}>
+    <AppBar position="sticky" elevation={0} sx={{ backgroundColor: (theme) => theme.palette.background.default }}>
       <Toolbar>
         <Stack
           direction="row"
@@ -31,6 +31,9 @@ export const Header: React.FC = () => {
             onClick={() => {
               setMode();
             }}
+            sx= {{
+              color: (theme) => theme.palette.text.primary
+            }}
           >
             {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
           </IconButton>
@@ -41,7 +44,7 @@ export const Header: React.FC = () => {
             justifyContent="center"
           >
             {user?.name ? (
-              <Typography variant="subtitle2">{user?.name}</Typography>
+              <Typography variant="subtitle2" sx={{ color: (theme) => theme.palette.text.primary}}>{user?.name}</Typography>
             ) : null}
             {user?.avatar ? (
               <Avatar src={user?.avatar} alt={user?.name} />

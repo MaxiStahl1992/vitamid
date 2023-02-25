@@ -11,7 +11,6 @@ import {
   Button,
   IconButton,
   MuiList,
-  width,
 } from "@pankod/refine-mui";
 import {
   ListOutlined,
