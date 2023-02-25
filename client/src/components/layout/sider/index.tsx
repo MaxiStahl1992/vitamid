@@ -348,7 +348,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
   };
 
   const drawer = (
-    <MuiList disablePadding sx={{ mt: 1, color: (theme) => theme.palette.background.default }}>
+    <MuiList disablePadding sx={{ mt: 1, color: (theme) => theme.palette.background.paper }}>
       {renderSider()}
     </MuiList>
   );
@@ -385,7 +385,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             display: { sm: "block", md: "none" },
             "& .MuiDrawer-paper": {
               width: 256,
-              bgcolor: (theme) => theme.palette.background.default,
+              bgcolor: (theme) => theme.palette.background.paper,
             },
           }}
         >
@@ -408,7 +408,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               width: drawerWidth,
-              bgcolor: (theme) => theme.palette.background.default,
+              bgcolor: (theme) => theme.palette.background.paper,
               overflow: "hidden",
               transition: "width 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
             },
@@ -436,7 +436,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           </Box>
           <Button
             sx={{
-              background: (theme) => theme.palette.background.default,
+              background: (theme) => theme.palette.background.paper,
               textAlign: "center",
               justifyContent: "center",
               margin: "10px auto",

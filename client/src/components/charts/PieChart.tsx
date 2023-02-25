@@ -3,13 +3,12 @@ import { Box, Typography, Stack } from "@pankod/refine-mui";
 
 import { PieChartProps } from "interfaces/home";
 
-const PieChart = ({ title, value, series, colors }: PieChartProps) => {
+const PieChart = ({ title, value, unit, series, colors }: PieChartProps) => {
     return (
         <Box
             id="chart"
             flex={1}
             display="flex"
-            bgcolor="#fcfcfc"
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
@@ -19,18 +18,21 @@ const PieChart = ({ title, value, series, colors }: PieChartProps) => {
             borderRadius="15px"
             minHeight="110px"
             width="fit-content"
+            sx={{
+                backgroundColor: (theme) => theme.palette.background.paper,
+            }}
         >
             <Stack direction="column">
-                <Typography fontSize={14} color="#808191">
+                <Typography fontSize={14} sx={{ color: (theme) => theme.palette.text.secondary }}>
                     {title}
                 </Typography>
                 <Typography
-                    fontSize={24}
-                    color="#11142d"
+                    fontSize={22}
                     fontWeight={700}
                     mt={1}
+                    sx={{ color: (theme) => theme.palette.text.primary }}
                 >
-                    {value}
+                    {value} {unit}
                 </Typography>
             </Stack>
 

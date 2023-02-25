@@ -14,7 +14,7 @@ type ColorModeContextType = {
 const myLightTheme = createTheme ({
   palette: {
       background: {
-        default: "#fafafa",
+        default: "#f4f4f4",
         paper: "#fff"
       },
       text : {
